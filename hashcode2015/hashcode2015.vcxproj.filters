@@ -24,6 +24,9 @@
     <ClInclude Include="InputLoader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Output.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

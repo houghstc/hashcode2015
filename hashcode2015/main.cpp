@@ -6,6 +6,7 @@
 
 #include "InputLoader.h"
 #include "ServerDistributer.h"
+#include "Output.h"
 
 #include <iostream>
 
@@ -40,9 +41,6 @@ int GetScore(const std::vector<shared_ptr<Server>>& servers)
     return score;
 }
 
-
-
-
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "We are the champion!\n";
@@ -60,18 +58,25 @@ int main(int argc, const char * argv[]) {
 
     shared_ptr<RandomServerDistributer> distributer(new RandomServerDistributer);
 
-    int bestScore = 0;
-    for(int i = 0; i< 100; ++i)
-    {
-        distributer->Reset(dc, loader.servers);
-        distributer->Distribute(dc, loader.servers);
-        int score = GetScore(loader.servers);
-        cout <<"score is :" << score << endl;
-        bestScore = max(bestScore, score);
-        
-    }
 
-    cout << "best score is :" << bestScore << endl;
+    distributer->Reset(dc, loader.servers);
+    distributer->Distribute(dc, loader.servers);
+
+    int score = GetScore(loader.servers);
+    cout <<"score is :" << score << endl;
+	OutputWriter::WriteOutput(loader.servers, R"(C:\Users\U0137572\test\hashcode2015\Debug\dc.out)");
+
+    //int bestScore = 0;
+    //for(int i = 0; i< 10000; ++i)
+    //{
+    //    distributer->Reset(dc, loader.servers);
+    //    distributer->Distribute(dc, loader.servers);
+    //    int score = GetScore(loader.servers);
+    //    cout <<"score is :" << score << endl;
+    //    bestScore = max(bestScore, score);
+    //}
+
+    //cout << "best score is :" << bestScore << endl;
 
     return 0;
 }

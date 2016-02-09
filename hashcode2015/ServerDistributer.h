@@ -4,14 +4,13 @@
 #include <memory>
 #include <queue>
 
+#include <random>
+
 class ServerDistributer
 {
 public:
     virtual void Distribute(DataCenter& dataCenter, vector<std::shared_ptr<Server>>& servers) = 0;
 };
-
-
-#include <random>
 
 
 class RandomServerDistributer : public ServerDistributer
@@ -61,7 +60,8 @@ public:
 
             auto server = serverQueue.front();
             serverQueue.pop();
-            PutServerIntoSlotRowByRow(dataCenter, server);
+			if (PutServerIntoSlotRowByRow(dataCenter, server))
+				server->pool = GetRandomPoolNumber() - 1;
         }
         //cout << "Distribute finished!" << endl;
     }
