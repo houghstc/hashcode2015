@@ -56,7 +56,8 @@ int main(int argc, const char * argv[]) {
     DataCenter dc;
     dc.SetUnavailableSlots(unSlots);
 
-    shared_ptr<RandomServerDistributer> distributer(new RandomServerDistributer);
+    //shared_ptr<ServerDistributer> distributer(new RandomServerDistributer);
+    shared_ptr<ServerDistributer> distributer(new CapacityPerSizeDistributer);
 
 
     distributer->Reset(dc, loader.servers);
@@ -77,6 +78,7 @@ int main(int argc, const char * argv[]) {
     //}
 
     //cout << "best score is :" << bestScore << endl;
+
 
     return 0;
 }
